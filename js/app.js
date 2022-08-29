@@ -34,10 +34,23 @@ const displayPhone = phones => {
         phonesContainer.appendChild(div);
 
     });
+    loading(false)
 }
 document.getElementById('search-btn').addEventListener('click', function () {
+    // start loader
+    loading(true)
     const inputText = document.getElementById('input-fielt');
     const searchInput = inputText.value;
     loadPhone(searchInput);
     inputText.value = '';
 })
+// loader call
+const loading = isloading => {
+    const loader = document.getElementById('loader');
+    if (isloading) {
+        loader.classList.remove('d-none');
+    }
+    else {
+        loader.classList.add('d-none');
+    }
+}
