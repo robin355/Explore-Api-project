@@ -37,6 +37,7 @@ const displayPhone = (phones, datalimit) => {
             <h5 class="card-title">${phone.phone_name}</h5>
             <p class="card-text">This is a longer card with supporting text below as a natural lead-in
                 to additional content. This content is a little bit longer.</p>
+                <button onclick="phoneDetaile('${phone.slug}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phoneDetail">Show Detaile</button>
         </div>
     </div>
         `;
@@ -51,6 +52,13 @@ const procesSearch = (datalimit) => {
     const searchInput = inputText.value;
     loadPhone(searchInput, datalimit);
 }
+// Enter Key
+document.getElementById('input-fielt').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        procesSearch(12);
+    }
+});
+
 document.getElementById('search-btn').addEventListener('click', function () {
     // start loader
     procesSearch(12);
@@ -65,7 +73,19 @@ const togoleSpinner = isloading => {
         loader.classList.add('d-none');
     }
 }
+//show all phones
 document.getElementById('btn-show-all').addEventListener('click', function () {
     procesSearch();
 
 })
+//phone detail
+const phoneDetaile = id => {
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayPhonedetaile(data.data))
+}
+const displayPhonedetaile = phone => {
+    const phoneDetaleId = document.getElementById('phoneDetailLabel');
+    phoneDetaleId.innerText = phone.name;
+}
