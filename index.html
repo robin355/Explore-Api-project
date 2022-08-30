@@ -14,22 +14,29 @@
         <h2 class="text-center text-warning">Welcome To My Phone Hunter</h2>
     </header>
     <main class="container">
+        <!-- //input area -->
         <section>
             <div class="mb-3 w-50 mt-3">
                 <input type="email" class="form-control" id="input-fielt" placeholder="Enter Your Phone">
                 <button id="search-btn" class="btn btn-primary mt-2">Search</button>
             </div>
         </section>
-        <section>
-            <div id="no-found" class="d-none">
-                <h1 class="text-warning">No found Your Search Phone</h1>
-            </div>
-        </section>
+        <!-- //phones Area -->
         <section>
             <div id="phones-container" class="row row-cols-1 row-cols-md-3 g-4">
 
             </div>
         </section>
+        <!-- //massage Area -->
+        <section>
+            <div id="no-found" class="d-none">
+                <h1 class="text-warning">No found Your Search Phone</h1>
+            </div>
+            <div id="show-all" class="text-center d-none">
+                <button id="btn-show-all" class="btn btn-primary">See More</button>
+            </div>
+        </section>
+        <!-- //spinner Area -->
         <section id="loader" class="d-none">
             <div style="height: 400px;" class="d-flex justify-content-center align-items-center">
                 <div class="spinner-border text-primary" role="status">

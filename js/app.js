@@ -1,14 +1,23 @@
-const loadPhone = (search) => {
+const loadPhone = (search, datalimit) => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${search}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => displayPhone(data.data));
+        .then(data => displayPhone(data.data, datalimit));
 
 }
-const displayPhone = phones => {
+const displayPhone = (phones, datalimit) => {
     const phonesContainer = document.getElementById('phones-container');
     phonesContainer.innerHTML = '';
-    phones = phones.slice(0, 20);
+    //phone length 10 more
+    const more = document.getElementById('show-all');
+    if (datalimit && phones.length > 12) {
+        phones = phones.slice(0, 12);
+        more.classList.remove('d-none')
+    }
+    else {
+        more.classList.add('d-none')
+    }
+    //display no found Phones
     const noFound = document.getElementById('no-found');
     if (phones.length === 0) {
         noFound.classList.remove('d-none')
@@ -34,18 +43,20 @@ const displayPhone = phones => {
         phonesContainer.appendChild(div);
 
     });
-    loading(false)
+    togoleSpinner(false)
+}
+const procesSearch = (datalimit) => {
+    togoleSpinner(true)
+    const inputText = document.getElementById('input-fielt');
+    const searchInput = inputText.value;
+    loadPhone(searchInput, datalimit);
 }
 document.getElementById('search-btn').addEventListener('click', function () {
     // start loader
-    loading(true)
-    const inputText = document.getElementById('input-fielt');
-    const searchInput = inputText.value;
-    loadPhone(searchInput);
-    inputText.value = '';
+    procesSearch(12);
 })
 // loader call
-const loading = isloading => {
+const togoleSpinner = isloading => {
     const loader = document.getElementById('loader');
     if (isloading) {
         loader.classList.remove('d-none');
@@ -54,3 +65,7 @@ const loading = isloading => {
         loader.classList.add('d-none');
     }
 }
+document.getElementById('btn-show-all').addEventListener('click', function () {
+    procesSearch();
+
+})
