@@ -86,6 +86,15 @@ const phoneDetaile = id => {
         .then(data => displayPhonedetaile(data.data))
 }
 const displayPhonedetaile = phone => {
+    console.log(phone)
     const phoneDetaleId = document.getElementById('phoneDetailLabel');
     phoneDetaleId.innerText = phone.name;
+    const phonesDetails = document.getElementById('phone-details');
+    phonesDetails.innerHTML = `
+    <p>ReleaseDate: ${phone.releaseDate ? phone.releaseDate : "No found"}</p>
+    <p>Storage: ${phone.mainFeatures ? phone.mainFeatures.storage : "No found"}</p>
+    <p>DisplaySize: ${phone.mainFeatures ? phone.mainFeatures.displaySize : "No found"}</p>
+    <p>Memory: ${phone.mainFeatures ? phone.mainFeatures.memory : "No found"}</p>
+    <p>Bluetooth : ${phone.others ? phone.others.Bluetooth : "No found"}</p>
+    `
 }
